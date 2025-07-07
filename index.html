@@ -2,7 +2,8 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>たいがのフラッシュカード</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>GPT'sフラッシュカード</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -27,37 +28,21 @@
       cursor: pointer;
       margin-bottom: 30px;
       min-height: 120px;
-      box-shadow:
-        0 8px 16px rgba(0,0,0,0.1),
-        0 4px 8px rgba(0,0,0,0.06);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.06);
       display: flex;
       justify-content: center;
       align-items: center;
       transition: box-shadow 0.3s ease;
     }
     #card:hover {
-      box-shadow:
-        0 12px 24px rgba(0,0,0,0.15),
-        0 6px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15), 0 6px 12px rgba(0,0,0,0.1);
     }
-    input[type="text"] {
-      width: calc(50% - 12px);
-      padding: 12px 15px;
-      margin: 0 6px 20px;
-      font-size: 1em;
-      border: 1.5px solid #ccc;
-      border-radius: 6px;
-      box-sizing: border-box;
-      transition: border-color 0.3s ease;
-    }
-    input[type="text"]:focus {
-      outline: none;
-      border-color: #4a90e2;
-      box-shadow: 0 0 6px #4a90e2aa;
+    .buttons {
+      margin-bottom: 40px;
     }
     button {
       padding: 12px 30px;
-      font-size: 1.1em;
+      font-size: 16px;
       border: none;
       border-radius: 6px;
       cursor: pointer;
@@ -71,23 +56,38 @@
       opacity: 0.5;
       cursor: default;
     }
-    button#btnCorrect {
+    #btnCorrect {
       background-color: #4caf50;
     }
-    button#btnCorrect:hover:not(:disabled) {
+    #btnCorrect:hover:not(:disabled) {
       background-color: #45a049;
     }
-    button#btnWrong {
+    #btnWrong {
       background-color: #f44336;
     }
-    button#btnWrong:hover:not(:disabled) {
+    #btnWrong:hover:not(:disabled) {
       background-color: #d32f2f;
     }
-    button[onclick] {
+    input[type="text"] {
+      width: calc(50% - 12px);
+      padding: 12px 15px;
+      margin: 0 6px 20px;
+      font-size: 16px;
+      border: 1.5px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #4a90e2;
+      box-shadow: 0 0 6px #4a90e2aa;
+    }
+    #addBtn {
       background-color: #2196f3;
       margin-top: 10px;
     }
-    button[onclick]:hover {
+    #addBtn:hover {
       background-color: #1976d2;
     }
     #addMsg {
@@ -107,26 +107,60 @@
         width: 100%;
         margin: 0 0 15px 0;
       }
-      button[onclick] {
+      button {
         width: 100%;
+        margin: 10px 0;
       }
-      #btnCorrect, #btnWrong {
-        width: 45%;
-        margin: 10px 2.5% 0;
-      }
-      div.buttons {
+      .buttons {
         display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
       }
     }
+    .card-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      border-bottom: 1px solid #eee;
+      font-size: 1em;
+    }
+    .card-item:last-child {
+      border-bottom: none;
+    }
+    .card-front {
+      font-weight: bold;
+    }
+    .card-back {
+      color: #666;
+      margin-left: 8px;
+    }
+    .delete-btn {
+      background-color: #e53935;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 0.9em;
+      cursor: pointer;
+    }
+    .delete-btn:hover {
+      background-color: #c62828;
+    }
+
   </style>
 </head>
 <body>
 
-  <h1>たいがのフラッシュカード</h1>
+  <h1>GPT'sフラッシュカード</h1>
 
   <div id="card">読み込み中...</div>
+
+  <div class="buttons">
+    <button id="btnCorrect" disabled>正解</button>
+    <button id="btnWrong" disabled>不正解</button>
+  </div>
 
   <hr />
 
@@ -135,14 +169,13 @@
     <input type="text" id="frontInput" placeholder="英単語 (表)" />
     <input type="text" id="backInput" placeholder="日本語訳 (裏)" />
   </div>
-  <button onclick="addNewCard()">追加</button>
+  <button id="addBtn" onclick="addNewCard()">追加</button>
   <p id="addMsg"></p>
 
-  <div class="buttons">
-    <button id="btnCorrect" disabled>正解</button>
-    <button id="btnWrong" disabled>不正解</button>
-  </div>
-
   <script src="main.js"></script>
+
+  <hr />
+  <h2>登録済みの単語</h2>
+  <div id="cardList" style="max-height: 200px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; border-radius: 6px; background: #fff;"></div>
 </body>
 </html>

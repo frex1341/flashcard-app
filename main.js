@@ -118,6 +118,7 @@ async function handleCorrect() {
   currentCard.lastReviewed = new Date().toISOString();
   await updateCard(currentCard);
   nextCard();
+  currentCard.correctCount = (currentCard.correctCount || 0) + 1;
 }
 
 // 不正解処理
@@ -174,6 +175,7 @@ async function init() {
     currentIndex = 0;
     showCard();
   };
+  renderCardList();
 }
 
 btnCorrect.addEventListener('click', handleCorrect);
@@ -200,7 +202,8 @@ function addNewCard() {
     notificationCount: 0,
     nextReviewDate: new Date().toISOString(),
     lastReviewed: null,
-    intervalIndex: 0
+    intervalIndex: 0,
+    correctCount: 0 
   };
 
   const tx = db.transaction(CARD_STORE, 'readwrite');
@@ -212,5 +215,71 @@ function addNewCard() {
     msg.textContent = '追加しました！ページを更新すると反映されます';
     document.getElementById('frontInput').value = '';
     document.getElementById('backInput').value = '';
+  };
+  renderCardList();
+}
+
+function renderCardList() {
+  const listElem = document.getElementById('cardList');
+  listElem.innerHTML = '';
+
+  const tx = db.transaction(CARD_STORE, 'readonly');
+  const store = tx.objectStore(CARD_STORE);
+
+  store.openCursor().onsuccess = e => {
+    const cursor = e.target.result;
+    if (cursor) {
+      const card = cursor.value;
+
+      // 初期化されてない古いカードに対応
+      card.correctCount = card.correctCount || 0;
+      card.notificationCount = card.notificationCount || 0;
+
+      const div = document.createElement('div');
+      div.className = 'card-item';
+
+      const accuracy = card.notificationCount
+        ? Math.round((card.correctCount / card.notificationCount) * 100)
+        : '-';
+
+      const text = document.createElement('span');
+      text.innerHTML = `
+        <span class="card-front">${card.front}</span> /
+        <span class="card-back">${card.back}</span>
+        <span style="margin-left: 10px; font-size: 0.9em; color: #666;">
+          正解率: ${accuracy === '-' ? '-' : accuracy + '%'} 
+          (${card.correctCount}/${card.notificationCount})
+        </span>
+      `;
+
+      const delBtn = document.createElement('button');
+      delBtn.textContent = '削除';
+      delBtn.className = 'delete-btn';
+      delBtn.onclick = () => {
+        deleteCard(card.id);
+      };
+
+      div.appendChild(text);
+      div.appendChild(delBtn);
+      listElem.appendChild(div);
+
+      cursor.continue();
+    }
+  };
+}
+
+
+
+function deleteCard(id) {
+  const tx = db.transaction(CARD_STORE, 'readwrite');
+  const store = tx.objectStore(CARD_STORE);
+  const request = store.delete(id);
+  request.onsuccess = () => {
+    renderCardList();
+    // もし現在表示中のカードが削除されたら、再取得
+    dueCards = dueCards.filter(c => c.id !== id);
+    if (currentCard && currentCard.id === id) {
+      nextCard();
+    }
   };
 }
