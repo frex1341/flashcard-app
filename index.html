@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>たいがのフラッシュカード</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 400px;
+      margin: 40px auto;
+      text-align: center;
+    }
+    #card {
+      user-select: none;
+      border: 2px solid #333;
+      padding: 40px 20px;
+      font-size: 2em;
+      cursor: pointer;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      background-color: #fafafa;
+      min-height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    button {
+      margin: 0 10px;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>たいがのフラッシュカード</h1>
+
+  <div id="card">読み込み中...</div>
+  
+  <hr style="margin: 30px 0;" />
+
+  <h2>単語追加フォーム</h2>
+  <input type="text" id="frontInput" placeholder="英単語 (表)" />
+  <input type="text" id="backInput" placeholder="日本語訳 (裏)" />
+  <button onclick="addNewCard()">追加</button>
+  <p id="addMsg" style="color: green;"></p>
+
+  <div>
+    <button id="btnCorrect" disabled>正解</button>
+    <button id="btnWrong" disabled>不正解</button>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
