@@ -5,30 +5,120 @@
   <title>たいがのフラッシュカード</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      max-width: 400px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 420px;
       margin: 40px auto;
+      padding: 0 15px;
       text-align: center;
+      background: #f0f4f8;
+      color: #333;
+    }
+    h1 {
+      margin-bottom: 30px;
+      font-weight: 700;
+      color: #222;
     }
     #card {
       user-select: none;
-      border: 2px solid #333;
-      padding: 40px 20px;
-      font-size: 2em;
+      border-radius: 12px;
+      background-color: #fff;
+      padding: 50px 20px;
+      font-size: 2.2em;
       cursor: pointer;
-      margin-bottom: 20px;
-      border-radius: 8px;
-      background-color: #fafafa;
-      min-height: 100px;
+      margin-bottom: 30px;
+      min-height: 120px;
+      box-shadow:
+        0 8px 16px rgba(0,0,0,0.1),
+        0 4px 8px rgba(0,0,0,0.06);
       display: flex;
       justify-content: center;
       align-items: center;
+      transition: box-shadow 0.3s ease;
+    }
+    #card:hover {
+      box-shadow:
+        0 12px 24px rgba(0,0,0,0.15),
+        0 6px 12px rgba(0,0,0,0.1);
+    }
+    input[type="text"] {
+      width: calc(50% - 12px);
+      padding: 12px 15px;
+      margin: 0 6px 20px;
+      font-size: 1em;
+      border: 1.5px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #4a90e2;
+      box-shadow: 0 0 6px #4a90e2aa;
     }
     button {
-      margin: 0 10px;
-      padding: 10px 20px;
-      font-size: 1.2em;
+      padding: 12px 30px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 6px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin: 0 8px 20px;
+      color: #fff;
+      font-weight: 600;
+      user-select: none;
+    }
+    button:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+    button#btnCorrect {
+      background-color: #4caf50;
+    }
+    button#btnCorrect:hover:not(:disabled) {
+      background-color: #45a049;
+    }
+    button#btnWrong {
+      background-color: #f44336;
+    }
+    button#btnWrong:hover:not(:disabled) {
+      background-color: #d32f2f;
+    }
+    button[onclick] {
+      background-color: #2196f3;
+      margin-top: 10px;
+    }
+    button[onclick]:hover {
+      background-color: #1976d2;
+    }
+    #addMsg {
+      height: 1.5em;
+      font-weight: 600;
+      margin-top: -10px;
+      margin-bottom: 20px;
+      min-height: 24px;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #ddd;
+      margin: 40px 0;
+    }
+    @media (max-width: 480px) {
+      input[type="text"] {
+        width: 100%;
+        margin: 0 0 15px 0;
+      }
+      button[onclick] {
+        width: 100%;
+      }
+      #btnCorrect, #btnWrong {
+        width: 45%;
+        margin: 10px 2.5% 0;
+      }
+      div.buttons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
     }
   </style>
 </head>
@@ -37,16 +127,18 @@
   <h1>たいがのフラッシュカード</h1>
 
   <div id="card">読み込み中...</div>
-  
-  <hr style="margin: 30px 0;" />
+
+  <hr />
 
   <h2>単語追加フォーム</h2>
-  <input type="text" id="frontInput" placeholder="英単語 (表)" />
-  <input type="text" id="backInput" placeholder="日本語訳 (裏)" />
-  <button onclick="addNewCard()">追加</button>
-  <p id="addMsg" style="color: green;"></p>
-
   <div>
+    <input type="text" id="frontInput" placeholder="英単語 (表)" />
+    <input type="text" id="backInput" placeholder="日本語訳 (裏)" />
+  </div>
+  <button onclick="addNewCard()">追加</button>
+  <p id="addMsg"></p>
+
+  <div class="buttons">
     <button id="btnCorrect" disabled>正解</button>
     <button id="btnWrong" disabled>不正解</button>
   </div>

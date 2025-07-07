@@ -169,9 +169,7 @@ async function init() {
   const countRequest = store.count();
 
   countRequest.onsuccess = async () => {
-    if (countRequest.result === 0) {
-      await addSampleCards();
-    }
+    // サンプルカードを追加しない
     dueCards = await getDueCards();
     currentIndex = 0;
     showCard();
