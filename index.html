@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>たいがのフラッシュカード</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>My Flashcard</h1>
+  </header>
+  
+  <!-- デッキ一覧を表示する部分 -->
+  <section id="deck-list-section">
+    <header class="section-header">デッキ一覧</header>
+    <ul id="deckList"></ul>
+
+  <!-- ページネーション（ページ移動ボタン） -->
+    <div id="pagination">
+      <button id="prevPageBtn">前へ</button>
+      <span id="currentPage">ページ 1</span>
+      <button id="nextPageBtn">次へ</button>
+    </div>
+
+    <div id="createDeckForm">
+     <input type="text" id="deckNameInput" placeholder="デッキ名を入力">
+      <button id="createDeckBtn">デッキを作成</button>
+    </div>
+  </section>
+
+  <section id="card-list-section" style="display: none;">
+    <header class="btn-header">
+      <span id="selectedDeckName">選択中のデッキ名</span>
+    </header>
+    <button id="backDeckForm">デッキ画面に戻る</button>
+    
+    <!-- カードを表示するパネル -->
+    <h2 id="cardFront">表（質問）</h2>
+    <div id="flashCardBtns">
+      <button id="correctBtn" type="button">正解</button>
+      <button id="incorrectBtn" type="button">不正解</button>
+    </div>
+
+    <label id="deckCheck">
+      <input type="checkbox"  id="learningModeCheckbox">
+      繰り返し学習
+    </label>
+
+    <!-- カード追加フォーム -->
+    <div id="addCardForm">
+      <input type="text" id="questionInput" placeholder="表（質問）">
+      <input type="text" id="answerInput" placeholder="裏（答え）">
+      <button id="addCardBtn">カードを追加</button>
+    </div>
+
+    <!-- カード一覧 -->
+    <div id="cardContainer">
+      <header class="section-header">カード一覧</header>
+      <ul id="cardList"></ul>
+    </div>
+  </section>
+
+  <script src="main.js"></script>
+</body>
+</html>
