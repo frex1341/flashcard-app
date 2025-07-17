@@ -1,4 +1,4 @@
-﻿// main.js
+// main.js
 // フラッシュカードアプリのメインスクリプト
 // IndexedDBを使ってデッキとカードのデータを管理
 let db;
@@ -77,6 +77,12 @@ function initDB() { // IndexedDBの初期化
       reject(event.target.error);
     };
   });
+}
+
+function getDaysBetweenDates(startStr, endStr) {
+  const start = new Date(startStr);
+  const end = new Date(endStr);
+  return Math.round((end - start) / (1000 * 60 * 60 * 24));
 }
 
 //デッキセクション
@@ -223,9 +229,9 @@ function renderDeckList(decks) {
 
   decks.forEach(deck => {
     const li = document.createElement("li");
-
+　　　const todayStr = new Date().toISOString().split('T')[0];
+　　　const daysLeft = getDaysBetweenDates(todayStr, deck.nextReviewDate);
     const span = document.createElement("span");
-    const daysLeft = Math.ceil((new Date(deck.nextReviewDate) - new Date()) / (1000 * 60 * 60 * 24));
     const setsuyaku = (1 - deck.currentTimeSecond/deck.maxTimeSecond)*100
     span.textContent = `📘 ${deck.name}（あと ${daysLeft} 日）,節約率${setsuyaku}`;
     span.style.marginRight = "10px";
