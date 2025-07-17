@@ -82,10 +82,11 @@ function initDB() { // IndexedDBの初期化
   });
 }
 
-function getDaysBetweenDates(startStr, endStr) {
-  const start = new Date(startStr);
-  const end = new Date(endStr);
-  return Math.round((end - start) / (1000 * 60 * 60 * 24));
+function getDaysBetweenDates(dateStr1, dateStr2) {
+  const d1 = new Date(dateStr1 + 'T00:00:00'); // 時刻固定
+  const d2 = new Date(dateStr2 + 'T00:00:00');
+  const msPerDay = 1000 * 60 * 60 * 24;
+  return Math.round((d2 - d1) / msPerDay);
 }
 
 //デッキセクション
