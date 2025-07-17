@@ -85,8 +85,8 @@ function initDB() { // IndexedDBの初期化
 function getDaysBetweenDates(dateStr1, dateStr2) {
   const date1 = new Date(dateStr1 + "T00:00:00");
   const date2 = new Date(dateStr2 + "T00:00:00");
-  const diffTime = date2.getTime() - date1.getTime();
-  return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  const diffTime = date2 - date1;
+  return Math.floor(diffTime / (1000 * 60 * 60 * 24));
 }
 
 //デッキセクション
