@@ -381,7 +381,8 @@ function showCardsForDeck(deckId, deckName) {
 
   // 選択中のデッキ名を表示
   document.getElementById("selectedDeckName").textContent = deckName;
-
+  document.getElementById("selectedNextReview").textContent = currentDeckNextReview;
+  document.getElementById("selectedLastReview").textContent = currentDeckLastReview;
   // そのデッキに対応するカードを読み込み表示
   loadCardsForDeck(deckId);
 }
