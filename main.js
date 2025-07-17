@@ -23,6 +23,9 @@ let initialCard = true; // 初期カード表示フラグ
 let reviewed = false;
 let start = 0;
 let repeatCard = false;
+let currentDeckNextReview
+let currentDeckLastReview
+
 
 // 初期化処理
 (async function() {
@@ -237,6 +240,8 @@ function renderDeckList(decks) {
     span.style.marginRight = "10px";
     span.addEventListener("click", () => {
       selectedDeckName = deck.name;
+      currentDeckNextReview = deck.nextReviewDate
+      currentDeckLastReview = deck.lastReviewDate
       showCardsForDeck(deck.id, deck.name);
     });
 
