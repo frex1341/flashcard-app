@@ -241,8 +241,8 @@ function renderDeckList(decks) {
     span.style.marginRight = "10px";
     span.addEventListener("click", () => {
       selectedDeckName = deck.name;
-      currentDeckNextReview = deck.nextReviewDate
-      currentDeckLastReview = deck.lastReviewDate
+      currentDeckNextReview = deck.nextReviewDate;
+      currentDeckLastReview = deck.lastReviewDate;
       showCardsForDeck(deck.id, deck.name);
     });
 
