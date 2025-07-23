@@ -236,8 +236,8 @@ function renderDeckList(decks) {
 　　　const todayStr = new Date().toISOString().split('T')[0];
 　　　const daysLeft = getDaysBetweenDates(todayStr, deck.nextReviewDate);
     const span = document.createElement("span");
-    const setsuyaku = math.round((1 - deck.currentTimeSecond/deck.maxTimeSecond)*100);
-    span.textContent = `📘 ${deck.name}（あと ${daysLeft} 日）,節約率${setsuyaku}`;
+    const setsuyaku = (1 - deck.currentTimeSecond/deck.maxTimeSecond)*100;
+    span.textContent = `📘 ${deck.name}（あと ${daysLeft} 日）,節約率${setsuyaku|| 0}%}`;
     span.style.marginRight = "10px";
     span.addEventListener("click", () => {
       selectedDeckName = deck.name;
