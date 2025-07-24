@@ -1,7 +1,7 @@
 // main.js
 // フラッシュカードアプリのメインスクリプト
 // IndexedDBを使ってデッキとカードのデータを管理
-
+let db = null;
 const DB_VERSION = 1; // IndexedDBのバージョン
 const DB_NAME = "FlashcardDB"; // IndexedDBのデータベース名
 const DECK_STORE = "decks"; // デッキのデータを保存するストア名
@@ -45,6 +45,9 @@ let currentDeckLastReview
 
 function initDB() { // IndexedDBの初期化
   return new Promise((resolve, reject) => {
+    if (db) {
+      return resolve(db);
+    }
     const request = indexedDB.open(DB_NAME, DB_VERSION);
 
     request.onupgradeneeded = (event) => {
