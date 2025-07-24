@@ -48,6 +48,7 @@ function initDB() { // IndexedDBの初期化
     const request = indexedDB.open(DB_NAME, DB_VERSION);
 
     request.onupgradeneeded = (event) => {
+      alert("アップグレードinitDB");
       db = event.target.result;
 
       // デッキ用ストアがまだない場合は作成
@@ -72,11 +73,13 @@ function initDB() { // IndexedDBの初期化
     };
 
     request.onsuccess = (event) => {
+      alert("サクセスinitDB");
       db = event.target.result;
       resolve();
     };
 
     request.onerror = (event) => {
+      alert("エラーinitDB");
       reject(event.target.error);
     };
   });
