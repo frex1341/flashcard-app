@@ -1,7 +1,7 @@
 // main.js
 // フラッシュカードアプリのメインスクリプト
 // IndexedDBを使ってデッキとカードのデータを管理
-let db;
+
 const DB_VERSION = 1; // IndexedDBのバージョン
 const DB_NAME = "FlashcardDB"; // IndexedDBのデータベース名
 const DECK_STORE = "decks"; // デッキのデータを保存するストア名
@@ -49,7 +49,7 @@ function initDB() { // IndexedDBの初期化
 
     request.onupgradeneeded = (event) => {
       alert("アップグレードinitDB");
-      db = event.target.result;
+      const db = event.target.result;
 
       // デッキ用ストアがまだない場合は作成
       if (!db.objectStoreNames.contains(DECK_STORE)) {
@@ -75,7 +75,7 @@ function initDB() { // IndexedDBの初期化
     request.onsuccess = (event) => {
       alert("サクセスinitDB");
       db = event.target.result;
-      resolve();
+      resolve(db);
     };
 
     request.onerror = (event) => {
@@ -94,7 +94,7 @@ function getDaysBetweenDates(dateStr1, dateStr2) {
 
 //デッキセクション
 async function loadAllDecks() {
-  await initDB();
+  const db = await initDB();
   return new Promise((resolve, reject) => {
     const tx = db.transaction(DECK_STORE, "readonly");
     const store = tx.objectStore(DECK_STORE);
@@ -130,6 +130,7 @@ function showSampleDecks() { // サンプルデッキを表示する関数
     {id:15, name:"デッキ15", nextReviewDate:"2025-07-10"},
   ];
 
+　const db = await initDB();
   const tx = db.transaction(DECK_STORE, "readwrite");
   const store = tx.objectStore(DECK_STORE);
   for (const deck of sampleDecks) {
@@ -147,6 +148,7 @@ function showSampleDecks() { // サンプルデッキを表示する関数
 
 function deleteDeck(deckId) {
   return new Promise((resolve, reject) => {
+    const db = await initDB();
     const tx = db.transaction(DECK_STORE, "readwrite");
     const store = tx.objectStore(DECK_STORE);
     const request = store.delete(deckId);
@@ -163,6 +165,7 @@ function deleteDeck(deckId) {
 
 function deleteCardsForDeck(deckId) {
   return new Promise((resolve, reject) => {
+    const db = await initDB();
     const tx = db.transaction(CARD_STORE, "readwrite");
     const store = tx.objectStore(CARD_STORE);
     const index = store.index("deckId");
@@ -206,6 +209,7 @@ function deleteCardsForDeck(deckId) {
 
 async function getSortedDecks() {
   return new Promise((resolve, reject) => {
+    const db = await initDB();
     const tx = db.transaction(DECK_STORE, "readonly");
     const store = tx.objectStore(DECK_STORE);
     const request = store.getAll();
@@ -296,6 +300,7 @@ document.getElementById("prevPageBtn").addEventListener("click", () => {
 });
 
 document.getElementById("nextPageBtn").addEventListener("click", () => {
+  const db = await initDB();
   const tx = db.transaction(DECK_STORE, "readonly");
   const store = tx.objectStore(DECK_STORE);
   const request = store.getAll();
@@ -330,6 +335,7 @@ document.getElementById("createDeckBtn").addEventListener("click", async () => {
     nextReviewDate: new Date().toISOString().split('T')[0] // 今日の日付を設定
   };
 
+　const db = await initDB();
   const tx = db.transaction(DECK_STORE, "readwrite");
   const store = tx.objectStore(DECK_STORE);
   store.add(deck);
@@ -362,6 +368,7 @@ function showCardsForDeck(deckId, deckName) {
   selectedDeckId = deckId;
   document.getElementById("correctBtn").disabled = false;
   document.getElementById("incorrectBtn").disabled = false;
+  const db = await initDB();
   const tx = db.transaction(DECK_STORE, "readwrite");
   const store = tx.objectStore(DECK_STORE);
   const deckRequest = store.get(selectedDeckId);
@@ -392,6 +399,7 @@ function showCardsForDeck(deckId, deckName) {
 }
 
 function loadCardsForDeck(deckId) {
+  const db = await initDB();
   const tx = db.transaction(CARD_STORE, "readonly");
   const store = tx.objectStore(CARD_STORE);
   const index = store.index("deckId");
@@ -480,6 +488,7 @@ function repeat() {
 }
 
 function reloadCardList() {
+  const db = await initDB();
   const tx = db.transaction(CARD_STORE, "readonly");
   const store = tx.objectStore(CARD_STORE);
   const index = store.index("deckId");
@@ -606,6 +615,7 @@ function endFlashcard() {
     document.getElementById("cardFront").textContent = "カードはすべて終了しました！";
     console.log(selectedDeckName, "のカードはすべて終了しました");
     console.log(currentLapseList);
+    const db = await initDB();
     const tx = db.transaction(DECK_STORE, "readwrite");
     const store = tx.objectStore(DECK_STORE);
     const deckRequest = store.get(selectedDeckId);
@@ -651,6 +661,7 @@ document.getElementById("cardFront").addEventListener("click", () => {
 
 function goToCardProperty(actionBtn) {
   const currentCard = currentCardList[currentCardIndex];
+  const db = await initDB();
   const tx = db.transaction(CARD_STORE, "readwrite");
   const store = tx.objectStore(CARD_STORE);
   const request = store.get(currentCard.id);
@@ -726,6 +737,7 @@ document.getElementById("addCardBtn").addEventListener("click", async () => {
   }
   
   // デッキのカード数を更新
+　const db = await initDB();
   const deckTx = db.transaction(DECK_STORE, "readwrite");
   const deckStore = deckTx.objectStore(DECK_STORE);
   const deckRequest = deckStore.get(selectedDeckId);
@@ -764,6 +776,7 @@ document.getElementById("addCardBtn").addEventListener("click", async () => {
 
 async function deleteCards(card) {
   return new Promise((resolve, reject) => {
+    const db = await initDB();
     const tx = db.transaction(CARD_STORE, "readwrite");
     const store = tx.objectStore(CARD_STORE);
     const request = store.delete(card.id);
@@ -786,6 +799,7 @@ function timeEnd() {
   const end = Date.now();
   const elapsedMs = end - start;
   console.log(`処理時間: ${elapsedMs} ミリ秒`);
+  const db = await initDB();
   const tx = db.transaction(DECK_STORE, "readwrite");
   const store = tx.objectStore(DECK_STORE);
   const deckRequest = store.get(selectedDeckId);
