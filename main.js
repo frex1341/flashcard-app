@@ -32,13 +32,16 @@ let currentDeckLastReview
   try {
     const allDecks = await loadAllDecks();
     if (allDecks.length === 0) {
+      alert("デッキなし初期化");
       console.log("デッキがまだありません。サンプルデッキを表示します。");
       showSampleDecks(); // サンプルデッキを表示
     } else {
+      alert("既存デッキあり初期化");
       console.log("既存のデッキを読み込みました", allDecks);
     }
     renderDeckPage(1, allDecks);  // allDecksを渡して描画
   } catch (error) {
+    alert("失敗初期化");
     console.error("デッキの読み込みまたは描画でエラー", error);
   }
 })();
@@ -97,6 +100,7 @@ function getDaysBetweenDates(dateStr1, dateStr2) {
 
 //デッキセクション
 async function loadAllDecks() {
+  alert("call loadalldecks");
   const db = await initDB();
   return new Promise((resolve, reject) => {
     const tx = db.transaction(DECK_STORE, "readonly");
