@@ -52,7 +52,7 @@ function initDB() { // IndexedDBの初期化
 
     request.onupgradeneeded = (event) => {
       alert("アップグレードinitDB");
-      const db = event.target.result;
+      db = event.target.result;
 
       // デッキ用ストアがまだない場合は作成
       if (!db.objectStoreNames.contains(DECK_STORE)) {
