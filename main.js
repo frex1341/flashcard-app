@@ -1,6 +1,7 @@
 // main.js
 // フラッシュカードアプリのメインスクリプト
 // IndexedDBを使ってデッキとカードのデータを管理
+alert("JSファイルが読み込まれました！");
 let db = null;
 const DB_VERSION = 1; // IndexedDBのバージョン
 const DB_NAME = "FlashcardDB"; // IndexedDBのデータベース名
