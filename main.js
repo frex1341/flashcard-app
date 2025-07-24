@@ -156,10 +156,10 @@ async function showSampleDecks() { // サンプルデッキを表示する関数
 }
 
 async function deleteDeck(deckId) {
+  const db = await initDB();
+  const tx = db.transaction(DECK_STORE, "readwrite");
+  const store = tx.objectStore(DECK_STORE);
   return new Promise((resolve, reject) => {
-    const db = await initDB();
-    const tx = db.transaction(DECK_STORE, "readwrite");
-    const store = tx.objectStore(DECK_STORE);
     const request = store.delete(deckId);
     request.onsuccess = () => {
       console.log(`デッキ ${deckId} を削除しました`);
@@ -173,10 +173,10 @@ async function deleteDeck(deckId) {
 }
 
 async function deleteCardsForDeck(deckId) {
+  const db = await initDB();
+  const tx = db.transaction(CARD_STORE, "readwrite");
+  const store = tx.objectStore(CARD_STORE);
   return new Promise((resolve, reject) => {
-    const db = await initDB();
-    const tx = db.transaction(CARD_STORE, "readwrite");
-    const store = tx.objectStore(CARD_STORE);
     const index = store.index("deckId");
     const request = index.getAll(IDBKeyRange.only(deckId));
     request.onsuccess = () => {
@@ -217,10 +217,10 @@ async function deleteCardsForDeck(deckId) {
 }
 
 async function getSortedDecks() {
+  const db = await initDB();
+  const tx = db.transaction(DECK_STORE, "readonly");
+  const store = tx.objectStore(DECK_STORE);
   return new Promise((resolve, reject) => {
-    const db = await initDB();
-    const tx = db.transaction(DECK_STORE, "readonly");
-    const store = tx.objectStore(DECK_STORE);
     const request = store.getAll();
 
     request.onsuccess = () => {
@@ -784,10 +784,10 @@ document.getElementById("addCardBtn").addEventListener("click", async () => {
 });
 
 async function deleteCards(card) {
+  const db = await initDB();
+  const tx = db.transaction(CARD_STORE, "readwrite");
+  const store = tx.objectStore(CARD_STORE);
   return new Promise((resolve, reject) => {
-    const db = await initDB();
-    const tx = db.transaction(CARD_STORE, "readwrite");
-    const store = tx.objectStore(CARD_STORE);
     const request = store.delete(card.id);
     request.onsuccess = () => {
       console.log(`カード ${card.id} を削除しました`);
