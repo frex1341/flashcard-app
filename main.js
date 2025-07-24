@@ -118,7 +118,7 @@ async function loadAllDecks() {
   });
 }
 
-function showSampleDecks() { // サンプルデッキを表示する関数
+async function showSampleDecks() { // サンプルデッキを表示する関数
   //例：サンプルのデッキデータ（実際はDBから読み込む）
   sampleDecks = [
     {id:1, name:"デッキ1", nextReviewDate:"2025-07-13"}, 
@@ -154,7 +154,7 @@ function showSampleDecks() { // サンプルデッキを表示する関数
   };
 }
 
-function deleteDeck(deckId) {
+async function deleteDeck(deckId) {
   return new Promise((resolve, reject) => {
     const db = await initDB();
     const tx = db.transaction(DECK_STORE, "readwrite");
@@ -171,7 +171,7 @@ function deleteDeck(deckId) {
   });
 }
 
-function deleteCardsForDeck(deckId) {
+async function deleteCardsForDeck(deckId) {
   return new Promise((resolve, reject) => {
     const db = await initDB();
     const tx = db.transaction(CARD_STORE, "readwrite");
@@ -307,7 +307,7 @@ document.getElementById("prevPageBtn").addEventListener("click", () => {
   }
 });
 
-document.getElementById("nextPageBtn").addEventListener("click", () => {
+document.getElementById("nextPageBtn").addEventListener("click", async () => {
   const db = await initDB();
   const tx = db.transaction(DECK_STORE, "readonly");
   const store = tx.objectStore(DECK_STORE);
@@ -371,7 +371,7 @@ document.getElementById("learningModeCheckbox").addEventListener("change", (even
   }
 });
 
-function showCardsForDeck(deckId, deckName) {
+async function showCardsForDeck(deckId, deckName) {
   reviewed = false;
   selectedDeckId = deckId;
   document.getElementById("correctBtn").disabled = false;
@@ -406,7 +406,7 @@ function showCardsForDeck(deckId, deckName) {
   loadCardsForDeck(deckId);
 }
 
-function loadCardsForDeck(deckId) {
+async function loadCardsForDeck(deckId) {
   const db = await initDB();
   const tx = db.transaction(CARD_STORE, "readonly");
   const store = tx.objectStore(CARD_STORE);
@@ -495,7 +495,7 @@ function repeat() {
   renderFlashcard();
 }
 
-function reloadCardList() {
+async function reloadCardList() {
   const db = await initDB();
   const tx = db.transaction(CARD_STORE, "readonly");
   const store = tx.objectStore(CARD_STORE);
@@ -616,7 +616,7 @@ function updateReviewCount(reviewCount, lapseCount, maxCount = 5) {
   }
 }
 
-function endFlashcard() {
+async function endFlashcard() {
   console.log("Before check", [...currentLapseList]); // スプレッドでコピー表示
   if (currentLapseList.every(x => x === 2)) {
     timeEnd();
@@ -667,7 +667,7 @@ document.getElementById("cardFront").addEventListener("click", () => {
   renderFlashcard();
 });
 
-function goToCardProperty(actionBtn) {
+async function goToCardProperty(actionBtn) {
   const currentCard = currentCardList[currentCardIndex];
   const db = await initDB();
   const tx = db.transaction(CARD_STORE, "readwrite");
@@ -803,7 +803,7 @@ function timeStart() {
   start = Date.now();
 };
 
-function timeEnd() {
+async function timeEnd() {
   const end = Date.now();
   const elapsedMs = end - start;
   console.log(`処理時間: ${elapsedMs} ミリ秒`);
