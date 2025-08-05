@@ -4,8 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>たいがのフラッシュカード</title>
-  <link rel="stylesheet" href="/flashcard-app/style.css">
- <script src="https://cdn.jsdelivr.net/npm/eruda"></script> 
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="icons/favicon-16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="icons/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
 </head>
 <body>
   <header>
@@ -15,6 +18,9 @@
   <!-- デッキ一覧を表示する部分 -->
   <section id="deck-list-section">
     <header class="section-header">デッキ一覧</header>
+    <!-- デッキ一覧を表示する部分<div class="centered-wrapper">
+      <button id="changeColor" onclick="switchTheme()">テーマ切り替え</button>
+    </div> -->
     <ul id="deckList"></ul>
 
   <!-- ページネーション（ページ移動ボタン） -->
@@ -26,12 +32,12 @@
 
     <div id="createDeckForm">
      <input type="text" id="deckNameInput" placeholder="デッキ名を入力">
-      <button id="createDeckBtn">デッキを作成</button>
+      <button id="createDeckBtn" class="blue-btn">デッキを作成</button>
     </div>
   </section>
 
   <section id="card-list-section" style="display: none;">
-    <header class="btn-header">
+    <header class="section-header">
       <span id="selectedDeckName">選択中のデッキ名</span>
     </header>
     <button id="backDeckForm">デッキ画面に戻る</button>
@@ -45,16 +51,30 @@
       <button id="incorrectBtn" type="button">不正解</button>
     </div>
 
-    <label id="deckCheck">
-      <input type="checkbox"  id="learningModeCheckbox">
-      繰り返し学習
-    </label>
+    <div id="cardCheckGb">
+      <label id="deckCheck">
+        <input type="checkbox"  id="learningModeCb">
+        テストモード（1日1回）
+      </label>
+      <label id="repeatCheck">
+        <input type="checkbox"  id="strictedRepeatCb">
+        間違えた問題だけ
+      </label>
+      <label id="randomCheck">
+        <input type="checkbox" onclick="randomCheck(event)">
+        ランダム
+      </label>
+      <label id="reverseCheck">
+        <input type="checkbox" onclick="reverseCheck(event)">
+        反転
+      </label>
+    </div>
 
     <!-- カード追加フォーム -->
     <div id="addCardForm">
       <input type="text" id="questionInput" placeholder="表（質問）">
       <input type="text" id="answerInput" placeholder="裏（答え）">
-      <button id="addCardBtn">カードを追加</button>
+      <button id="addCardBtn" class="blue-btn">カードを追加</button>
     </div>
 
     <!-- カード一覧 -->
@@ -64,7 +84,6 @@
     </div>
   </section>
 
-  <script src="/flashcard-app/main.js"></script>
-  <script>eruda.init();</script>
+  <script src="main.js"></script>
 </body>
 </html>
