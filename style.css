@@ -169,7 +169,11 @@ button.blue-btn {
   );
   left: 2%;
   top: 45%;
-  color: var(--btn-option1);
+  color: hsl(
+    var(--btn-detail-hue), 
+    100, 
+    100
+  );
   border: 2px solid var(--btn-option1);
   border-radius: 6px;
   padding: 10px 20px;
@@ -293,7 +297,11 @@ button.blue-btn:active {
 
 Input {
   background-color: hsl(var(--input-option1-hue), 50%, 10%);
-  color: hsl(var(--input-option2-hue), 100%, 70%);
+  color: hsl(
+    var(--btn-detail-hue), 
+    100, 
+    100
+  );
   border: 2px solid var(--btn-option1);
   border-radius: 6px;
   padding: 10px 15px;
@@ -572,3 +580,4 @@ input[type="checkbox"][disabled] {
   color: var(--accent-color);
 }
 /* <= */
+
