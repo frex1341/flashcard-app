@@ -1,165 +1,207 @@
-﻿header {
-  background-color: #0a0f0a;  /* 超ダークなグリーンブラック */
-  color: #39ff14;             /* ネオングリーン（目に優しい） */
-  font-family: 'Courier New', monospace; /* レトロ感 */
-  font-size: 1.5rem;
-  text-align: center;
-  padding: 20px 0;
-  border-bottom: 2px solid #39ff14;
-  text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14;
-  box-shadow: 0 4px 20px rgba(57, 255, 20, 0.2); /* ほんのり光る */
+
+/* ========================================
+  タイトル: たいがのフラッシュカード - スタイルシート
+  説明   : 学習用UIに最適化した色・構造・アニメーション設定
+  作成者 : Taiga
+  更新日 : 2025-07-22
+  備考   : 配色は目に優しく集中しやすいグリーン系を使用
+======================================== */
+
+:root {
+  --main-bg: black;
+  --bg-option1: #0a3105;
+  --accent-bg: #0a0f0a;
+  --accent-active-bg: #132813;
+  --list-bg: #222;
+  --bg-option1-hue: 0;
+  --bg-option2-hue: 20;
+  --bg-option3-hue: 40;
+  --bg-option4-hue: 60;
+  --bg-option5-hue: 80;
+  --bg-option6-hue: 100;
+  --bg-option7-hue: 120;
+  --bg-option8-hue: 140;
+  --bg-option9-hue: 160;
+  --bg-option10-hue: 180;
+  --bg-option11-hue: 200;
+  --public-bg-saturation: 100%;
+  --public-bg-lightness: 5%;
+
+  --main-color: aquamarine;
+  --accent-color: #39ff14;
+  --sub-color: #eee;
+
+  --btn-normal: #39ff14;
+  --btn-delete: #ff4d4d;
+  --btn-delete-bg: #1a0a0a;
+  --btn-delete-shadow: rgba(255, 77, 77, 0.3);
+  --btn-option1: #2189f8;
+  --btn-delete-hue: 0;
+  --btn-detail-hue: 220;
+  --input-option1-hue: 220;
+  --input-option2-hue: 200;
+  --btn-bg-saturation: 100%;
+  --btn-bg-lightness: 5%;
+  --btn-bg-saturation-hover: 100%;
+  --btn-bg-lightness-hover: 15%;
+  --btn-correct-bg: #09ff009a;
+  --btn-correct-color: #ffffff;
+  --btn-incorrect-bg: #ff0000b0;
+  --btn-incorrect-color: #ffffff;
+  --cardlist-q-color: white;
+  --cardlist-a-color: lightcoral;
 }
 
-@keyframes glow {
-  0% {
-    text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14;
-  }
-  100% {
-    text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14;
-  }
+body {
+  background-color: var(--main-bg);
+  color: var(--main-color);
+}
+
+.centered-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: auto;
 }
 
 header {
   animation: glow 2s ease-in-out infinite alternate;
+  background-color: var(--accent-bg);  /* 超ダークなグリーンブラック */
+  border-radius: 10px;
+  border-bottom: 2px solid var(--accent-color);
+  box-shadow: 0 4px 20px rgba(57, 255, 20, 2); /* ほんのり光る */
+  color: var(--accent-color);             /* ネオングリーン（目に優しい） */
+  font-family: 'Courier New', monospace; /* レトロ感 */
+  font-size: 1.5rem;
+  padding: 20px 0;
+  text-align: center;
+  text-shadow: 0 0 5px var(--accent-color), 0 0 10px var(--accent-color);
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 5px var(--accent-color), 0 0 10px var(--accent-color);
+  }
+  100% {
+    text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
+  }
 }
 
 .section-header {
   width: 80%;
-  margin: 0 auto;
+  margin: 10px auto;
   font-size: 1.4rem;
   font-weight: bold;
-  color: #00ffcc;
-  background-color: #111;
+  color: var(--accent-color);
+  background-color: var(--accent-bg);
   padding: 10px 20px;
   margin-bottom: 12px;
-  box-shadow: 0 0 10px #00ffcc55;
+  box-shadow: 0 0 10px var(--accent-color);
   border-radius: 4px;
 }
 
-body {
-  background-color: black;
-  color: aquamarine;
-}
-
-
+/* 緑色のボタンの設定 =====>>>>> */
 button {
-  background-color: #101c10;        /* 暗い緑ベース */
-  color: #39ff14;                   /* ネオングリーン文字 */
-  border: 2px solid #39ff14;        /* 線もネオンカラー */
+  background-color: var(--accent-bg);        /* 暗い緑ベース */
+  color: var(--accent-color);                   /* ネオングリーン文字 */
+  border: 2px solid var(--accent-color);        /* 線もネオンカラー */
   border-radius: 8px;               /* やや丸く */
   padding: 10px 20px;
   font-family: 'Courier New', monospace;
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  text-shadow: 0 0 3px #39ff14;
+  text-shadow: 0 0 3px var(--accent-color);
   box-shadow: 0 0 5px rgba(57, 255, 20, 0.3);
 }
 
 button:hover {
-  background-color: #132813;
-  box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14;
+  background-color: var(--accent-active-bg);
+  box-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
 }
 
 button:active {
   transform: scale(0.97);
-  box-shadow: 0 0 5px #39ff14 inset;
+  box-shadow: 0 0 5px var(--accent-color) inset;
 }
+/* <= */
 
+/* 赤いボタンの設定 =====>>>>> */
 button.red-btn {
   position: absolute;
-  left: 28%;
-  top: 45%;
-  background-color: #1a0a0a;        /* 暗めの赤背景 */
-  color: #ff4d4d;                  /* ネオンレッド */
-  border: 2px solid #ff4d4d;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-family: 'Courier New', monospace;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-shadow: 0 0 3px #ff4d4d;
-  box-shadow: 0 0 5px rgba(255, 77, 77, 0.3);
-}
-
-button.red-btn2 {
-  position: absolute;
-  right: 2%;
-  top: 60%;
-  height: 35%;
-  display: flex;
-  align-items: center;  /* ← 垂直方向に中央揃え */
-  justify-content: center; /* 水平方向に中央揃え */
-  background-color: #1a0a0a;        /* 暗めの赤背景 */
-  color: #ff4d4d;                  /* ネオンレッド */
-  border: 2px solid #ff4d4d;
+  background-color: hsl(
+    var(--btn-delete-hue), 
+    var(--btn-bg-saturation), 
+    var(--btn-bg-lightness)
+  );
+  color: var(--btn-delete);                  /* ネオンレッド */
+  border: 2px solid var(--btn-delete);
   border-radius: 8px;
   font-family: 'Courier New', monospace;
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  text-shadow: 0 0 3px #ff4d4d;
-  box-shadow: 0 0 5px rgba(255, 77, 77, 0.3);
+  text-shadow: 0 0 3px var(--btn-delete);
+  box-shadow: 0 0 5px var(--btn-delete-shadow);
 }
 
 button.red-btn:hover {
-  background-color: #2a0f0f;
-  box-shadow: 0 0 10px #ff4d4d, 0 0 20px #ff4d4d;
-}
-
-button.red-btn2:hover {
-  background-color: #2a0f0f;
-  box-shadow: 0 0 10px #ff4d4d, 0 0 20px #ff4d4d;
+  background-color: hsl(
+    var(--btn-delete-hue), 
+    var(--btn-bg-saturation-hover), 
+    var(--btn-bg-lightness-hover)
+  );
+  box-shadow: 0 0 10px var(--btn-delete), 0 0 20px var(--btn-delete);
 }
 
 button.red-btn:active {
   transform: scale(0.97);
-  box-shadow: 0 0 5px #ff4d4d inset;
+  box-shadow: 0 0 5px var(--btn-delete) inset;
 }
+/* <= */
 
-button.red-btn2:active {
-  transform: scale(0.97);
-  box-shadow: 0 0 5px #ff4d4d inset;
-}
-
-/* 青色テーマの汎用ボタン */
+/* 青いボタンの設定 =====>>>>> */
 button.blue-btn {
   position: absolute;
+  background-color: hsl(
+    var(--btn-detail-hue), 
+    var(--btn-bg-saturation), 
+    var(--btn-bg-lightness)
+  );
   left: 2%;
   top: 45%;
-  background-color: #007BFF;       /* 明るい青 */
-  color: #fff;
-  border: 2px solid #0056b3;       /* 濃い青の枠線 */
+  color: var(--btn-option1);
+  border: 2px solid var(--btn-option1);
   border-radius: 6px;
   padding: 10px 20px;
-  font-weight: 600;
   cursor: pointer;
+  text-shadow: 0 0 3px var(--btn-option1);
   transition: background-color 0.3s ease, border-color 0.3s ease;
   box-shadow: 0 0 8px #3399ff99;
 }
 
 button.blue-btn:hover {
-  background-color: #0056b3;       /* ホバー時に濃い青 */
-  border-color: #003d80;
-  box-shadow: 0 0 12px #0056b3cc;
+  background-color: hsl(
+    var(--btn-detail-hue), 
+    var(--btn-bg-saturation-hover), 
+    var(--btn-bg-lightness-hover)
+  );
+  box-shadow: 0 0 10px var(--btn-option1), 0 0 20px var(--btn-option1);
 }
 
 button.blue-btn:active {
-  background-color: #004080;       /* 押したときもっと濃い青 */
-  border-color: #00264d;
-  box-shadow: none;
+  transform: scale(0.97);
+  box-shadow: 0 0 5px var(--btn-option1) inset;
 }
+/* <= */
 
+/* デッキリストの設定 =====>>>>> */
 #deckList {
   border-radius: 10px;
   width: 90%;
   max-width: 800px;
   margin: 0 auto;
-  background: #222;
-  color: #00f0ff;
+  background: var(--accent-bg);
   padding: 10px;
-  cursor: pointer;
 }
 
 #deckList li {
@@ -172,12 +214,13 @@ button.blue-btn:active {
   padding-bottom: 4px; /* スクロールバーに被らないように */
   max-width: 600px;
   display: flex;
-  background-color: #222;
-  color: #00ffcc;
+  background-color: var(--list-bg);
+  color: var(--main-color);
   padding: 10px;
   margin: 10px auto;
   border-radius: 8px;
-  box-shadow: 0 0 6px #00ffcc44;
+  box-shadow: 0 0 6px var(--accent-active-bg);
+  cursor: pointer;
 }
 
 #deckList li:hover {
@@ -186,9 +229,41 @@ button.blue-btn:active {
   transition: all 0.3s ease;
 }
 
+#deckList li.overdue {
+  color: #ff4d4d;
+  background-color: #382222;
+}
+
+#deckList li.overdue:hover {
+  box-shadow: 0 0 15px #ff4d4d, 0 0 30px #ff4d4d;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+
+#deckList li.due-today {
+  color: aqua;
+  background-color: #17243d;
+}
+
+#deckList li.due-today:hover {
+  box-shadow: 0 0 15px #007BFF, 0 0 30px #007BFF;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+
+#deckListDeleteBtn {
+  position: absolute;
+  right: 2%;
+  bottom: 10%;
+}
+/* <= */
+
+/* デッキリストのページインプットの設定 =====>>>>> */
 #pagination {
   margin-top: 20px;
   text-align: center;
+  font-size: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #pagination button {
@@ -197,44 +272,60 @@ button.blue-btn:active {
   margin: 0 10px;
   cursor: pointer;
 }
+/* <= */
 
+/* デッキリストの新デッキインプットの設定 =====>>>>> */
 #createDeckForm{
-  display: flex;            /* フォームをフレックスボックスに */
-  flex-direction: row;   /* ← ここを column から row に */
+  display: flex;            
   align-items: center;
-  justify-content: center; /* 中央揃え */
+  justify-content: center; 
   margin: 20px auto;
-  gap: 10px;             /* 要素間の隙間を作る（任意） */
+  gap: 15px;
+  background-color: hsl(
+    var(--bg-option11-hue),
+    var(--public-bg-saturation),
+    var(--public-bg-lightness)
+  );
+  padding: 20px;
+  width: 85%;
+  border-radius: 20px;
 }
 
 Input {
-  background-color: #0a1f44;      /* 濃い紺色の背景 */
-  color: #cce4ff;                 /* 明るい青みの文字 */
-  border: 2px solid #007BFF;      /* 青い枠線 */
+  background-color: hsl(var(--input-option1-hue), 50%, 10%);
+  color: hsl(var(--input-option2-hue), 100%, 70%);
+  border: 2px solid var(--btn-option1);
   border-radius: 6px;
   padding: 10px 15px;
   font-size: 16px;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 0 6px #3399ff77;
+  box-shadow: 0 0 10px hsl(var(--input-option1-hue), 100%, 50%);
   outline: none;
   width: 100%;
-  max-width: 400px;               /* 適度な幅 */
+  max-width: 400px;
 }
 
 input:focus {
-  border-color: #0671e4;          /* フォーカス時の濃い青 */
-  box-shadow: 0 0 20px #0494e7; /* フォーカス時の光る効果 */
+  border-color: hsl(var(--input-option1-hue), 100%, 50%);         
+  box-shadow: 0 0 20px hsl(var(--input-option2-hue), 100%, 50%);
 }
 
 input::placeholder {
-  color: lightblue;
+  color: hsl(var(--input-option2-hue), 90%, 80%);
   font-style: italic;
 }
 
+#createDeckBtn {
+  position: relative;
+}
+/* <= */
+
+/* カードリストのヘッダーの設定 =====>>>>> */
 #backDeckForm {
+  display: flex;
   font-size: 14px;
-  width: 30%;
-  background-color: #32502a; /* 濃い紺色 */
+  width: 50%;
+  background-color: var(--accent-active-bg);
   margin: 10px auto;
 }
 
@@ -249,27 +340,49 @@ input::placeholder {
   }
 }
 
-#selectedDeckName {
-  font-size: 30px;
-  top: 18%;
-  left: 30%;
-  color: #00ffcc; /* 明るい青 */
+#selectedNextReview {
+  display: flex;
+  font-size: 14px;
+  width: 50%;
+  background-color: var(--accent-active-bg); /* 濃い紺色 */
+  margin: 10px auto;
 }
 
+#selectedLastReview {
+  display: flex;
+  font-size: 14px;
+  width: 50%;
+  background-color: var(--accent-active-bg); /* 濃い紺色 */
+  margin: 10px auto;
+}
+
+#selectedDeckName {
+  font-size: 16px;
+  top: 18%;
+  left: 30%;
+  color: var(--main-color); /* 明るい青 */
+}
+/* <= */
+
+/* フラッシュカードの表示の設定 =====>>>>> */
 #cardFront  {
-  background-color: #001600; /* 暗い深緑 */
-  color: #7FFF00; /* 明るい緑 */
+  background-color: hsl(
+        var(--bg-option9-hue),
+        var(--public-bg-saturation),
+        var(--public-bg-lightness)
+      ); 
+  color: var(--accent-color);
   font-family: 'VT323', monospace, 'Courier New', monospace;
   font-size: 1.4rem;
-  padding: 20px;
-  border: 2px solid #00FF00;
-  border-radius: 4px; /* 角は少しだけ丸く */
+  padding: 10px;
+  border: 2px solid var(--accent-color);
+  border-radius: 4px; 
   box-shadow:
-    0 0 8px #00FF00AA,  /* 薄いグリーンの光 */
-    inset 0 0 15px #003300AA; /* 内側の微かな光沢 */
+    0 0 8px var(--accent-color),
+    inset 0 0 15px var(--accent-active-bg);
   width: 80%;
   max-width: 400px;
-  margin: 100px auto; /* 上下中央に配置 */
+  margin: 50px auto; /* 上下中央に配置 */
   position: relative;
   letter-spacing: 0.05em; /* 文字間隔少し広め */
   height: 300px; /* 高さを固定 */
@@ -282,34 +395,21 @@ input::placeholder {
   white-space: normal;   /* 自動折り返し */
 }
 
-.cardFront::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: repeating-linear-gradient(
-    45deg,
-    rgba(0,255,0,0.05) 0,
-    rgba(0,255,0,0.05) 1px,
-    transparent 1px,
-    transparent 2px
-  );
-  pointer-events: none;
-  z-index: 1;
-}
-
 #flashCardBtns {
   display: flex;
   justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  background-color: darkslategray;
+  text-align: center;
+  gap: 30px;
+  margin: auto;
+  margin-bottom: 50px;
+  background-color: var(--accent-active-bg);
+  width: 90%;
 }
 
 #correctBtn {
-  background-color: green;
+  background-color: var(--btn-correct-bg);
   width: 100px;
-  color: white;
+  color: var(--btn-correct-color);
   padding: 10px 20px;
   border-radius: 10px;
   font-size: 18px;
@@ -321,8 +421,8 @@ input::placeholder {
 
 #incorrectBtn {
   width: 100px;
-  background-color: red;
-  color: white;
+  background-color: var(--btn-incorrect-bg);
+  color: var(--btn-incorrect-color);
   padding: 10px 20px;
   border-radius: 10px;
   font-size: 18px;
@@ -332,12 +432,15 @@ input::placeholder {
   cursor: not-allowed;
 }
 
+/* <= */
+
+/* フラッシュカードの追加フォームの設定 =====>>>>> */
 #addCardForm {
   margin-top: 300px;
   align-items: center;
   justify-content: center;
-  background-color: #112d66;
-  color: aquamarine;
+  background-color: hsl(var(--input-option1-hue), 80%, 10%);
+  color: var(--main-color);
   border-radius: 20px;
   padding: 20px;
   gap: 20px;
@@ -363,55 +466,53 @@ input::placeholder {
 }
 
 #addCardBtn {
-display: flex;
+  position: relative;
+  display: flex;
   align-items: center;
   justify-content: center;
   margin: 10px auto;
   width: 70%;
 }
+/* <= */
+
+/* チェックボックスの設定 =====>>>>> */
+#cardCheckGb {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10%;
+  font-size: 16px;
+  gap: 8px;
+}
 
 input[type="checkbox"] {
   appearance: none;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #7FFF00;
-  background-color: #001600;
+  width: 100px;
+  height: 30px;
+  border: 2px solid var(--btn-option1);
+  background-color: hsl(
+      var(--bg-option11-hue),
+      var(--public-bg-saturation),
+      var(--public-bg-lightness)
+    );
   margin-right: 8px;
   vertical-align: middle;
   cursor: pointer;
+  box-shadow: 0 0 10px var(--btn-option1);
 }
 
 input[type="checkbox"]:checked {
-  background-color: #00FF00;
+  background-color: var(--main-color);
 }
 
-label {
-  color: #7FFF00;
-  font-family: 'VT323', monospace;
-  display: flex;
-  align-items: center;
-  font-size: 1.2rem;
+input[type="checkbox"][disabled] {
+  background-color:  var(--btn-delete)!important;
+  accent-color: var(--btn-delete-bg) !important;
 }
+/* <= */
 
-#deckCheck {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-}
-
-#addCardBtn {
-  font-size: 16px;
-  border-radius: 6px;
-}
-
-#cardInput {
-  width: 200px;
-}
-
+/* カードリストの設定 =====>>>>> */
 #cardContainer {
   margin-top: 50px;
-  background-color: black;
   padding: 20px;
   border-radius: 20px;
 }
@@ -422,7 +523,6 @@ label {
   max-width: 800px;
   margin: 0 auto;
   background: #222;
-  color: #00f0ff;
   padding: 10px;
   cursor: pointer;
 }
@@ -436,52 +536,39 @@ label {
   -webkit-overflow-scrolling: touch; /* iOSでスムーズに */
   padding-bottom: 4px; /* スクロールバーに被らないように */
   max-width: 600px;
-  display: flex;
   background-color: #1b251d;
-  color: #ffffff;
   padding: 10px;
   margin: 10px auto;
   border-radius: 8px;
   box-shadow: 0 0 6px #00ffcc21;
 }
+
 #qspan {
   position: absolute;
   left: 2%;
   top: 2%;
+  color: var(--cardlist-q-color);
 }
 
 #aspan {
   position: absolute;
   left: 2%;
   top: 32%;
+  color: var(--cardlist-a-color);
+}
+
+#cardListDeleteBtn {
+  position: absolute;
+  bottom: 6%;
+  right: 2%;
+  height: 30px;
+  line-height: 10px;
 }
 
 #answerRatio {
   position: absolute;
   left: 2%;
   top: 62%;
-  color: #00FF00;
+  color: var(--accent-color);
 }
-
-#cardCorrectAnswerRatio {
-  position: absolute;
-  padding: 0px;
-  top: 8px;
-  right: 140px;
-  font-size: 20px;
-  color: lightgreen;
-}
-
-#cardDelete-Btn {
-  position: absolute;
-  padding: 0px;
-  width: 100px;
-  height: 35px;
-  top: 50%;
-  right: 10px;
-  background-color: rgb(209, 118, 118);
-  color: white;
-  font-size: 18px;
-  border-radius: 10px;
-  cursor: pointer;
-}
+/* <= */
