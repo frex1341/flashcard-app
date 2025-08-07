@@ -74,17 +74,10 @@ let isNotInitialCard = false;
     try {
       const store = await getDeckStore();
       for (const deck of sampleDecks) {
-        store.add(deck);
+        await promisifyRequest(store.add(deck));
       }
-
-      tx.oncomplete = () => {
-        console.log("サンプルデッキを保存しました");
-      };
-
-      tx.onerror = (e) => {
-        console.error("サンプルデッキの保存中にエラー", e.target.error);
-      };
-
+      console.log("サンプルデッキを保存しました");
+      
     } catch(err) {
       console.error("サンプル処理中にエラー")
     }
@@ -389,7 +382,7 @@ let isNotInitialCard = false;
       const end = start + itemsPerPage;
       const decksToShow = allDecks.slice(start, end);
       renderDeckList(decksToShow);
-      document.getElementById("currentPage").textContent = `ページ ${page}`;
+      document.getElementById("currentPage").textContent = `${page}`;
     } catch (error) {
       console.error("デッキ表示でエラーが発生しました", error);
     }
@@ -403,17 +396,26 @@ let isNotInitialCard = false;
       const li = document.createElement("li");
       const daysLeft = getDaysBetweenDates(getJapanTime(), deck.nextReviewDate);
 
-      const span = document.createElement("span");
-      const setsuyakuRaw = 1 - deck.currentTimeSecond / deck.maxTimeSecond;
-      const setsuyaku = deck.maxTimeSecond > 0 ? (100 * setsuyakuRaw).toFixed(1): "0.0";
-      span.textContent = `📘 ${deck.name}（あと ${daysLeft} 日）, 節約率 ${setsuyaku}%`;
-      span.style.marginRight = "10px";
-      span.addEventListener("click", () => {cardSectionInitialize(deck.id);});
+      const deckNameSpan = document.createElement("span");
+      const retrievabilityRaw = 1 - deck.currentTimeSecond / deck.maxTimeSecond;
+      const retrievability = deck.maxTimeSecond > 0 ? (100 * retrievabilityRaw).toFixed(1): "0.0";
+      deckNameSpan.textContent = `<< ${deck.name} >> `;
+      deckNameSpan.id = "deckNameSpan"
+      li.addEventListener("click", () => {cardSectionInitialize(deck.id);});
 
-      if (daysLeft < 0) {li.classList.add("overdue");}
-      if (daysLeft === 0) {li.classList.add("due-today");}
+      const retrievabilitySpan = document.createElement("span");
+      retrievabilitySpan.textContent = `節約率 ${retrievability}%`
+      retrievabilitySpan.id = "retrievabilitySpan"
+
+      const reviewSpan = document.createElement("span");
+      reviewSpan.textContent = `あと ${daysLeft} 日`
+      reviewSpan.id = "reviewSpan"
+
+      if (daysLeft < 0) {li.classList.add("overdue");deckNameSpan.classList.add("overdue");}
+      if (daysLeft === 0) {li.classList.add("due-today");deckNameSpan.classList.add("due-today");}
 
       const detailBtn = createButton("詳細", "blue-btn", () => {cardSectionInitialize(deck.id);});
+      detailBtn.id = "deckListDetailBtn";
 
       const deleteBtn = createButton("削除", "red-btn", () => {
         const confirmDelete = confirm(`「${deck.name}」を削除してもよいですか？`);
@@ -421,7 +423,9 @@ let isNotInitialCard = false;
       });
       deleteBtn.id = "deckListDeleteBtn";
 
-      li.appendChild(span);
+      li.appendChild(deckNameSpan);
+      li.appendChild(retrievabilitySpan);
+      li.appendChild(reviewSpan);
       li.appendChild(detailBtn);
       li.appendChild(deleteBtn);
 
