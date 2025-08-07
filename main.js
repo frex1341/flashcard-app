@@ -604,7 +604,6 @@ let isNotInitialCard = false;
     currentCardIndex++;
     if (currentCardIndex >= currentCardList.length) {
       currentCardIndex = -1;
-      timeEnd();
       endFlashcard(); // 復習終了処理
       return;
     } 
@@ -715,6 +714,7 @@ let isNotInitialCard = false;
 
     try {
       if (currentLapseList.every(x => x === 2)) {
+        timeEnd();
         document.getElementById("cardFront").textContent = "カードはすべて終了しました！";
         document.getElementById("correctBtn").disabled = true;
         document.getElementById("incorrectBtn").disabled = true;
@@ -929,3 +929,4 @@ let isNotInitialCard = false;
 
 //>|>|>|>|>|>|>|>|>|>|
 //>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|
+
