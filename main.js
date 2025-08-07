@@ -684,7 +684,6 @@ let isNotInitialCard = false;
       showingCardFront = true;
       isNotInitialCard = false;
       document.getElementById("cardFront").textContent = "もう一周";
-      renderFlashcard();
       return;
     };
     const flags = currentLapseList;
@@ -929,4 +928,5 @@ let isNotInitialCard = false;
 
 //>|>|>|>|>|>|>|>|>|>|
 //>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|
+
 
