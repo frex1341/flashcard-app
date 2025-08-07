@@ -13,6 +13,39 @@
   --accent-bg: #0a0f0a;
   --accent-active-bg: #132813;
   --list-bg: #222;
+
+  /*ボタン用の変数*/
+  --b-c1-h: 10;                   /*--btn-color1-hue*/
+  --b-c2-h: 120;                  /*--btn-color2-hue*/
+  --b-c3-h: 180;                  /*--btn-color3-hue*/
+  --b-c4-h: 240;                  /*--btn-color4-hue*/
+  --b-c5-h: 220;                  /*--btn-color5-hue*/
+  --b-c-s: 100%;                  /*--btn-color-saturation*/
+  --b-c-l: 80%;                   /*--btn-color-lightness*/
+  --b-l-s: 100%;                  /*--btn-line-saturation*/
+  --b-l-l: 50%;                   /*--btn-line-lightness*/
+  --b-bg-s: 100%;                 /*--btn-bg-saturation*/
+  --b-bg-l: 5%;                   /*--btn-bg-lightness*/
+  --b-bg-h-s: 100%;               /*--btn-bg:hover-saturation*/
+  --b-bg-h-l: 10%;                /*--btn-bg:hover-lightness*/
+  /*-----*/
+
+  /*デッキリスト用の変数*/
+  --deli-c1-h: 10;                 /*--decklist-color1-hue*/
+  --deli-c2-h: 50;                /*--decklist-color2-hue*/
+  --deli-c3-h: 100;               /*--decklist-color3-hue*/
+  --deli-c4-h: 150;               /*--decklist-color4-hue*/
+  --deli-c5-h: 220;               /*--decklist-color5-hue*/
+  --deli-c6-h: 180;               /*--decklist-color5-hue*/
+  --deli-c7-h: 50;               /*--decklist-color5-hue*/
+  --deli-c-s: 100%;               /*--decklist-color-saturation*/
+  --deli-c-l: 50%;                /*--decklist-color-lightness*/
+  --deli-bg-s: 60%;               /*--decklist-bg-saturation*/
+  --deli-bg-l: 20%;               /*--decklist-bg-lightness*/
+  --deli-l-s: 100%;               /*--decklist-line-saturation*/
+  --deli-l-l: 50%;                /*--decklist-line-lightness*/
+
+  /*-----*/
   --bg-option1-hue: 0;
   --bg-option2-hue: 20;
   --bg-option3-hue: 40;
@@ -24,6 +57,8 @@
   --bg-option9-hue: 160;
   --bg-option10-hue: 180;
   --bg-option11-hue: 200;
+  --bg-option12-hue: 220;
+  --bg-option13-hue: 240;
   --public-bg-saturation: 100%;
   --public-bg-lightness: 5%;
 
@@ -101,61 +136,62 @@ header {
 
 /* 緑色のボタンの設定 =====>>>>> */
 button {
-  background-color: var(--accent-bg);        /* 暗い緑ベース */
-  color: var(--accent-color);                   /* ネオングリーン文字 */
-  border: 2px solid var(--accent-color);        /* 線もネオンカラー */
-  border-radius: 8px;               /* やや丸く */
-  padding: 10px 20px;
+  background-color: hsl(var(--b-c2-h),var(--b-bg-s),var(--b-bg-l));
+  color: hsl(var(--b-c2-h),var(--b-c-s),var(--b-c-l));
+  border: 3px solid hsl(var(--b-c2-h),var(--b-l-s),var(--b-l-l));
+  border-radius: 10px;
+  padding: 10px 30px;
   font-family: 'Courier New', monospace;
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  text-shadow: 0 0 3px var(--accent-color);
-  box-shadow: 0 0 5px rgba(57, 255, 20, 0.3);
+  text-shadow: 0 0 10px hsl(var(--b-c2-h),var(--b-l-s),var(--b-l-l));
+  box-shadow: 0 0 10px hsl(var(--b-c2-h),var(--b-l-s),var(--b-l-l));
 }
 
 button:hover {
-  background-color: var(--accent-active-bg);
-  box-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
+  background-color: hsl(var(--b-c2-h),var(--b-bg-h-s),var(--b-bg-h-l));
+  box-shadow:  0 0 10px
+    hsl(var(--b-c2-h),var(--b-l-s),var(--b-l-l)),
+    0 0 20px
+    hsl(var(--b-c2-h),var(--b-l-s),var(--b-l-l));
 }
 
 button:active {
-  transform: scale(0.97);
-  box-shadow: 0 0 5px var(--accent-color) inset;
+  transform: scale(0.92);
+  box-shadow: 0 0 5px 
+    hsl(var(--b-c2-h),var(--b-l-s),var(--b-l-l))
+    inset;
 }
 /* <= */
 
 /* 赤いボタンの設定 =====>>>>> */
 button.red-btn {
   position: absolute;
-  background-color: hsl(
-    var(--btn-delete-hue), 
-    var(--btn-bg-saturation), 
-    var(--btn-bg-lightness)
-  );
-  color: var(--btn-delete);                  /* ネオンレッド */
-  border: 2px solid var(--btn-delete);
-  border-radius: 8px;
-  font-family: 'Courier New', monospace;
-  font-size: 1rem;
-  cursor: pointer;
+  background-color: hsl(var(--b-c1-h),var(--b-bg-s),var(--b-bg-l));
+  color: hsl(var(--b-c1-h),var(--b-c-s),var(--b-c-l));
+  border: 2px solid
+    hsl(var(--b-c1-h),var(--b-l-s),var(--b-l-l));
   transition: all 0.2s ease;
-  text-shadow: 0 0 3px var(--btn-delete);
-  box-shadow: 0 0 5px var(--btn-delete-shadow);
+  text-shadow: 0 0 10px 
+    hsl(var(--b-c1-h),var(--b-l-s),var(--b-l-l));
+  box-shadow: 0 0 10px 
+    hsl(var(--b-c1-h),var(--b-l-s),var(--b-l-l));
 }
 
 button.red-btn:hover {
-  background-color: hsl(
-    var(--btn-delete-hue), 
-    var(--btn-bg-saturation-hover), 
-    var(--btn-bg-lightness-hover)
-  );
-  box-shadow: 0 0 10px var(--btn-delete), 0 0 20px var(--btn-delete);
+  background-color: hsl(var(--b-c1-h),var(--b-bg-h-s),var(--b-bg-h-l));
+  box-shadow:  0 0 10px
+    hsl(var(--b-c1-h),var(--b-l-s),var(--b-l-l)),
+    0 0 20px
+    hsl(var(--b-c1-h),var(--b-l-s),var(--b-l-l));
 }
 
 button.red-btn:active {
-  transform: scale(0.97);
-  box-shadow: 0 0 5px var(--btn-delete) inset;
+  transform: scale(0.92);
+  box-shadow: 0 0 5px 
+    hsl(var(--b-c1-h),var(--b-l-s),var(--b-l-l))
+    inset;
 }
 /* <= */
 
@@ -167,17 +203,8 @@ button.blue-btn {
     var(--btn-bg-saturation), 
     var(--btn-bg-lightness)
   );
-  left: 2%;
-  top: 45%;
-  color: hsl(
-    var(--btn-detail-hue), 
-    100, 
-    100
-  );
+  color: turquoise;
   border: 2px solid var(--btn-option1);
-  border-radius: 6px;
-  padding: 10px 20px;
-  cursor: pointer;
   text-shadow: 0 0 3px var(--btn-option1);
   transition: background-color 0.3s ease, border-color 0.3s ease;
   box-shadow: 0 0 8px #3399ff99;
@@ -205,12 +232,20 @@ button.blue-btn:active {
   max-width: 800px;
   margin: 0 auto;
   background: var(--accent-bg);
-  padding: 10px;
+  padding-left: 1%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+@media (max-width: 400px) {
+  #deckList {
+    width: 98%;
+  }
 }
 
 #deckList li {
   position: relative;
-  width: 90%;
+  width: 84%;
   height: 80px;
   overflow-x: auto;
   white-space: nowrap;
@@ -219,8 +254,7 @@ button.blue-btn:active {
   max-width: 600px;
   display: flex;
   background-color: var(--list-bg);
-  color: var(--main-color);
-  padding: 10px;
+  padding: 6px 20px;
   margin: 10px auto;
   border-radius: 8px;
   box-shadow: 0 0 6px var(--accent-active-bg);
@@ -234,25 +268,82 @@ button.blue-btn:active {
 }
 
 #deckList li.overdue {
-  color: #ff4d4d;
-  background-color: #382222;
+  background-color: hsl(var(--deli-c1-h),var(--deli-bg-s),var(--deli-bg-l));
+}
+
+#deckList li span.overdue {
+  color: hsl(var(--deli-c7-h),var(--deli-c-s),var(--deli-c-l));
+  text-shadow: 0 0 10px 
+    hsl(var(--deli-c1-h),var(--deli-l-s),var(--deli-l-l));
 }
 
 #deckList li.overdue:hover {
-  box-shadow: 0 0 15px #ff4d4d, 0 0 30px #ff4d4d;
+  box-shadow: 0 0 10px
+    hsl(var(--deli-c1-h),var(--deli-l-s),var(--deli-l-l)),
+    0 0 40px 
+    hsl(var(--deli-c1-h),var(--deli-l-s),var(--deli-l-l));
   transform: scale(1.05);
   transition: all 0.3s ease;
 }
 
 #deckList li.due-today {
-  color: aqua;
-  background-color: #17243d;
+  background-color: hsl(var(--deli-c5-h),var(--deli-bg-s),var(--deli-bg-l));
+}
+
+#deckList li span.due-today {
+  color: hsl(var(--deli-c6-h),var(--deli-c-s),var(--deli-c-l));
+  text-shadow: 0 0 10px 
+    hsl(var(--deli-c5-h),var(--deli-l-s),var(--deli-l-l));
 }
 
 #deckList li.due-today:hover {
-  box-shadow: 0 0 15px #007BFF, 0 0 30px #007BFF;
+  box-shadow: 0 0 10px
+    hsl(var(--deli-c5-h),var(--deli-l-s),var(--deli-l-l)),
+    0 0 40px 
+    hsl(var(--deli-c5-h),var(--deli-l-s),var(--deli-l-l));
   transform: scale(1.05);
   transition: all 0.3s ease;
+}
+
+#deckNameSpan {
+  position: absolute;
+  top: 6%;
+  left: 6%;
+  font-size: 24px;
+}
+
+#retrievabilitySpan  {
+  color: hsl(var(--b-c3-h),var(--b-c-s),var(--b-c-l));;
+  position: absolute;
+  left: 28%;
+  bottom: 14%;
+}
+
+#reviewSpan {
+  color: hsl(var(--b-c3-h),var(--b-c-s),var(--b-c-l));;
+  position: absolute;
+  left: 4%;
+  bottom: 14%;
+}
+
+#deckListDetailBtn {
+  position: absolute;
+  right: 19%;
+  bottom: 10%;
+}
+
+@media (max-width: 400px) {
+  #deckListDetailBtn {
+    width: 5%;
+    height: 40%;
+    right: 20%;
+    font-size: 16px;
+    display: flex;
+    text-align: center;
+    padding: auto;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 #deckListDeleteBtn {
@@ -260,22 +351,62 @@ button.blue-btn:active {
   right: 2%;
   bottom: 10%;
 }
+
+@media (max-width: 400px) {
+  #deckListDeleteBtn {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    padding: auto;
+    justify-content: center;
+    width: 5%;
+    right: 1%;
+    font-size: 16px;
+    height: 40%;
+  }
+}
 /* <= */
 
 /* デッキリストのページインプットの設定 =====>>>>> */
 #pagination {
-  margin-top: 20px;
+  margin-top: 25px;
+  margin-bottom: 20px;
   text-align: center;
   font-size: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 }
 
 #pagination button {
-  border-radius: 20px;
-  padding: 8px 16px;
-  margin: 0 10px;
-  cursor: pointer;
+  font-size: 16px;
+  height: 40px;
+  display: flex;
+  text-align: center;
+  padding: auto;
+  justify-content: center;
+  align-items: center;
 }
+
+#currentPage {
+  font-family: 'VT323', monospace, 'Courier New', monospace;
+  text-shadow: 0 0 10px var(--accent-color),0 0 20px var(--accent-color);
+  border-bottom: 2px solid var(--accent-color);
+  padding: 0% 5%;
+  margin: 5%;
+  font-size: 20px;
+  border-radius: 0px;
+}
+
+@media (max-width: 400px) {
+  #currentPage {
+    padding: 1% 5%;
+    margin: 0%;
+    font-size: 16px;
+  }
+}
+
 /* <= */
 
 /* デッキリストの新デッキインプットの設定 =====>>>>> */
@@ -284,6 +415,7 @@ button.blue-btn:active {
   align-items: center;
   justify-content: center; 
   margin: 20px auto;
+  margin-bottom: 100px;
   gap: 15px;
   background-color: hsl(
     var(--bg-option11-hue),
@@ -297,11 +429,7 @@ button.blue-btn:active {
 
 Input {
   background-color: hsl(var(--input-option1-hue), 50%, 10%);
-  color: hsl(
-    var(--btn-detail-hue), 
-    100, 
-    100
-  );
+  color: hsl(var(--input-option2-hue), 100, 100);
   border: 2px solid var(--btn-option1);
   border-radius: 6px;
   padding: 10px 15px;
@@ -311,6 +439,12 @@ Input {
   outline: none;
   width: 100%;
   max-width: 400px;
+}
+
+@media (max-width: 400px) {
+  input {
+    width: 60%;
+  }
 }
 
 input:focus {
@@ -325,6 +459,16 @@ input::placeholder {
 
 #createDeckBtn {
   position: relative;
+}
+
+@media (max-width: 400px) {
+  #createDeckBtn {
+    padding: 0%;
+    display: flex;
+    width: 60px;
+    padding: 12px;
+    font-size: 16px;
+  }
 }
 /* <= */
 
@@ -382,13 +526,13 @@ input::placeholder {
   color: var(--accent-color);
   font-family: 'VT323', monospace, 'Courier New', monospace;
   font-size: 1.4rem;
-  padding: 10px;
+  padding: 11px;
   border: 2px solid var(--accent-color);
   border-radius: 4px; 
   box-shadow:
     0 0 8px var(--accent-color),
     inset 0 0 15px var(--accent-active-bg);
-  width: 80%;
+  width: 82%;
   max-width: 400px;
   margin: 50px auto; /* 上下中央に配置 */
   position: relative;
@@ -400,7 +544,10 @@ input::placeholder {
   overflow-y: auto;     /* 縦スクロールだけ許可 */
   overflow-x: hidden;   /* 横スクロール禁止 */
   word-wrap: break-word; /* 長い単語も途中で改行 */
+  overflow-wrap: break-word;
+  word-break: break-word; /* ブラウザによって効きが違うため補強用 */
   white-space: normal;   /* 自動折り返し */
+  box-sizing: border-box;   /* 推奨 → paddingも含めてサイズを計算 */
 }
 
 #flashCardBtns {
@@ -509,7 +656,7 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"]:checked {
-  background-color: var(--main-color);
+  background-color: var(--accent-color);
 }
 
 input[type="checkbox"][disabled] {
@@ -580,4 +727,3 @@ input[type="checkbox"][disabled] {
   color: var(--accent-color);
 }
 /* <= */
-
