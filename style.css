@@ -248,59 +248,52 @@ button.blue-btn:active {
   width: 84%;
   height: 80px;
   overflow-x: auto;
+  overflow-y: hidden;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch; /* iOSでスムーズに */
   padding-bottom: 4px; /* スクロールバーに被らないように */
   max-width: 600px;
   display: flex;
+  border: 2px solid var(--accent-color);
   background-color: var(--list-bg);
-  padding: 6px 20px;
   margin: 10px auto;
   border-radius: 8px;
-  box-shadow: 0 0 6px var(--accent-active-bg);
+  text-shadow: 0 0 3px var(--accent-color);
+  box-shadow: 0 0 10px var(--accent-active-bg),
+  0 0 14px var(--accent-active-bg);
   cursor: pointer;
+}
+
+#deckList li div {
+  position: absolute;
+  padding: 0%;
+  width: 12%;
+  height: 100px;
+  background: repeating-linear-gradient(
+    45deg,
+    #388e3c 4px,
+    var(--list-bg) 20px
+  );
+}
+
+#deckList li div.overdue {
+  background: repeating-linear-gradient(
+    45deg,
+    #8e5038 4px,
+    var(--list-bg) 20px
+  );
+}
+
+#deckList li div.due-today {
+  background: repeating-linear-gradient(
+    45deg,
+    #38848e 4px,
+    var(--list-bg) 20px
+  );
 }
 
 #deckList li:hover {
   box-shadow: 0 0 15px #00ffaa, 0 0 30px #00ffaa66;
-  transform: scale(1.05);
-  transition: all 0.3s ease;
-}
-
-#deckList li.overdue {
-  background-color: hsl(var(--deli-c1-h),var(--deli-bg-s),var(--deli-bg-l));
-}
-
-#deckList li span.overdue {
-  color: hsl(var(--deli-c7-h),var(--deli-c-s),var(--deli-c-l));
-  text-shadow: 0 0 10px 
-    hsl(var(--deli-c1-h),var(--deli-l-s),var(--deli-l-l));
-}
-
-#deckList li.overdue:hover {
-  box-shadow: 0 0 10px
-    hsl(var(--deli-c1-h),var(--deli-l-s),var(--deli-l-l)),
-    0 0 40px 
-    hsl(var(--deli-c1-h),var(--deli-l-s),var(--deli-l-l));
-  transform: scale(1.05);
-  transition: all 0.3s ease;
-}
-
-#deckList li.due-today {
-  background-color: hsl(var(--deli-c5-h),var(--deli-bg-s),var(--deli-bg-l));
-}
-
-#deckList li span.due-today {
-  color: hsl(var(--deli-c6-h),var(--deli-c-s),var(--deli-c-l));
-  text-shadow: 0 0 10px 
-    hsl(var(--deli-c5-h),var(--deli-l-s),var(--deli-l-l));
-}
-
-#deckList li.due-today:hover {
-  box-shadow: 0 0 10px
-    hsl(var(--deli-c5-h),var(--deli-l-s),var(--deli-l-l)),
-    0 0 40px 
-    hsl(var(--deli-c5-h),var(--deli-l-s),var(--deli-l-l));
   transform: scale(1.05);
   transition: all 0.3s ease;
 }
@@ -313,16 +306,14 @@ button.blue-btn:active {
 }
 
 #retrievabilitySpan  {
-  color: hsl(var(--b-c3-h),var(--b-c-s),var(--b-c-l));;
   position: absolute;
-  left: 28%;
+  left: 36%;
   bottom: 14%;
 }
 
 #reviewSpan {
-  color: hsl(var(--b-c3-h),var(--b-c-s),var(--b-c-l));;
   position: absolute;
-  left: 4%;
+  left: 6%;
   bottom: 14%;
 }
 
@@ -517,6 +508,24 @@ input::placeholder {
 /* <= */
 
 /* フラッシュカードの表示の設定 =====>>>>> */
+.main-container {
+  background-color: hsl(
+        var(--bg-option9-hue),
+        var(--public-bg-saturation),
+        var(--public-bg-lightness)
+      ); 
+  width: 82%;
+  height: 350px; /* 親コンテナの高さを固定 */
+  display: flex;
+  justify-content: center;
+  align-items: center; /* コンテンツが少ないときは中央に */
+  margin: 50px auto;
+  border: 2px solid var(--accent-color);
+  box-shadow:
+    0 0 8px var(--accent-color),
+    inset 0 0 15px var(--accent-active-bg);
+}
+
 #cardFront  {
   background-color: hsl(
         var(--bg-option9-hue),
@@ -524,24 +533,18 @@ input::placeholder {
         var(--public-bg-lightness)
       ); 
   color: var(--accent-color);
+  max-height: 80%; /* 親コンテナの高さを超えないように */
+  overflow-y: auto;
+  padding: 10px 12px;
+  text-align: center;
   font-family: 'VT323', monospace, 'Courier New', monospace;
   font-size: 1.4rem;
-  padding: 20px 12px;
-  border: 2px solid var(--accent-color);
   border-radius: 4px; 
-  box-shadow:
-    0 0 8px var(--accent-color),
-    inset 0 0 15px var(--accent-active-bg);
-  width: 82%;
+  width: 90%;
   margin: 50px auto; /* 上下中央に配置 */
   letter-spacing: 0.05em; /* 文字間隔少し広め */
-  height: 300px; /* 高さを固定 */
-  display: flex; /* フレックスボックスで中央揃え */
-  justify-content: center; /* 水平方向中央揃え */
-  text-align: center;
-  overflow-y: auto;     /* 縦スクロールだけ許可 */
+  align-items: flex-start;
   overflow-x: hidden;   /* 横スクロール禁止 */
-  word-wrap: break-word; /* 長い単語も途中で改行 */
   overflow-wrap: break-word;
   word-break: break-word; /* ブラウザによって効きが違うため補強用 */
   white-space: normal;   /* 自動折り返し */
@@ -724,4 +727,3 @@ input[type="checkbox"][disabled] {
   color: var(--accent-color);
 }
 /* <= */
-
