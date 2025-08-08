@@ -394,12 +394,13 @@ let isNotInitialCard = false;
     
     decks.forEach(deck => {
       const li = document.createElement("li");
+      const status = document.createElement("div");
       const daysLeft = getDaysBetweenDates(getJapanTime(), deck.nextReviewDate);
 
       const deckNameSpan = document.createElement("span");
       const retrievabilityRaw = 1 - deck.currentTimeSecond / deck.maxTimeSecond;
       const retrievability = deck.maxTimeSecond > 0 ? (100 * retrievabilityRaw).toFixed(1): "0.0";
-      deckNameSpan.textContent = `<< ${deck.name} >> `;
+      deckNameSpan.textContent = `${deck.name}`;
       deckNameSpan.id = "deckNameSpan"
       li.addEventListener("click", () => {cardSectionInitialize(deck.id);});
 
@@ -411,11 +412,8 @@ let isNotInitialCard = false;
       reviewSpan.textContent = `あと ${daysLeft} 日`
       reviewSpan.id = "reviewSpan"
 
-      if (daysLeft < 0) {li.classList.add("overdue");deckNameSpan.classList.add("overdue");}
-      if (daysLeft === 0) {li.classList.add("due-today");deckNameSpan.classList.add("due-today");}
-
-      const detailBtn = createButton("詳細", "blue-btn", () => {cardSectionInitialize(deck.id);});
-      detailBtn.id = "deckListDetailBtn";
+      if (daysLeft < 0) {status.classList.add("overdue");}
+      if (daysLeft === 0) {status.classList.add("due-today");}
 
       const deleteBtn = createButton("削除", "red-btn", () => {
         const confirmDelete = confirm(`「${deck.name}」を削除してもよいですか？`);
@@ -423,10 +421,10 @@ let isNotInitialCard = false;
       });
       deleteBtn.id = "deckListDeleteBtn";
 
+      li.appendChild(status);
       li.appendChild(deckNameSpan);
       li.appendChild(retrievabilitySpan);
       li.appendChild(reviewSpan);
-      li.appendChild(detailBtn);
       li.appendChild(deleteBtn);
 
       deckList.appendChild(li);
@@ -928,5 +926,3 @@ let isNotInitialCard = false;
 
 //>|>|>|>|>|>|>|>|>|>|
 //>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|
-
-
