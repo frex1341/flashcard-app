@@ -526,28 +526,25 @@ input::placeholder {
   color: var(--accent-color);
   font-family: 'VT323', monospace, 'Courier New', monospace;
   font-size: 1.4rem;
-  padding: 11px;
+  padding: 20px 12px;
   border: 2px solid var(--accent-color);
   border-radius: 4px; 
   box-shadow:
     0 0 8px var(--accent-color),
     inset 0 0 15px var(--accent-active-bg);
   width: 82%;
-  max-width: 400px;
   margin: 50px auto; /* 上下中央に配置 */
-  position: relative;
   letter-spacing: 0.05em; /* 文字間隔少し広め */
   height: 300px; /* 高さを固定 */
   display: flex; /* フレックスボックスで中央揃え */
   justify-content: center; /* 水平方向中央揃え */
-  align-items: center; /* 垂直方向中央揃え */
+  text-align: center;
   overflow-y: auto;     /* 縦スクロールだけ許可 */
   overflow-x: hidden;   /* 横スクロール禁止 */
   word-wrap: break-word; /* 長い単語も途中で改行 */
   overflow-wrap: break-word;
   word-break: break-word; /* ブラウザによって効きが違うため補強用 */
   white-space: normal;   /* 自動折り返し */
-  box-sizing: border-box;   /* 推奨 → paddingも含めてサイズを計算 */
 }
 
 #flashCardBtns {
@@ -727,3 +724,4 @@ input[type="checkbox"][disabled] {
   color: var(--accent-color);
 }
 /* <= */
+
