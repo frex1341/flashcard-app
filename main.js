@@ -726,11 +726,11 @@ let isNotInitialCard = false;
 
 /////////////////////////
 //  カードの裏返し表示
-  document.getElementById("cardFront").addEventListener("click", () => {
+  function reverseCard() {
     if (isNotInitialCard === false) {return;}
     showingCardFront = !showingCardFront;
     renderFlashcard();
-  });
+  }
 /////////////////////////
 
 /////////////////////////
@@ -926,3 +926,4 @@ let isNotInitialCard = false;
 
 //>|>|>|>|>|>|>|>|>|>|
 //>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|
+
