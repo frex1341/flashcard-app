@@ -730,7 +730,7 @@ let isNotInitialCard = false;
 
 /////////////////////////
 //  カードの裏返し表示
-  function reverseCards() {
+  function reverseCard() {
     if (isNotInitialCard === false) {return;}
     showingCardFront = !showingCardFront;
     renderFlashcard();
