@@ -504,8 +504,12 @@ let isNotInitialCard = false;
       const cardList = document.getElementById("cardList");
       cardList.innerHTML = "";
 
-      cards.forEach(card => {
+      cards.forEach((card,index) => {
         const li = document.createElement("li");
+        const liNumber = document.createElement("span");
+        liNumber.textContent = index + 1;
+        liNumber.id = "cardLiNumber";
+
         const qSpan = document.createElement("span");
         qSpan.textContent = `Q: ${card.question}`;
         qSpan.id = "qspan";
@@ -527,11 +531,11 @@ let isNotInitialCard = false;
         cardCorrectAnswerRatio.id = "answerRatio"
         cardCorrectAnswerRatio.textContent = `正答率: ${card.correctAnswerRatio || 0}%`;
 
-          // 両方をliに追加
         li.appendChild(qSpan);
         li.appendChild(aSpan);
         li.appendChild(deleteBtn);
         li.appendChild(cardCorrectAnswerRatio);
+        li.appendChild(liNumber);
 
         cardList.appendChild(li);
       });
@@ -726,16 +730,16 @@ let isNotInitialCard = false;
 
 /////////////////////////
 //  カードの裏返し表示
-  function reverseCard() {
+  document.getElementById("cardFront").addEventListener("click", () => {
     if (isNotInitialCard === false) {return;}
     showingCardFront = !showingCardFront;
     renderFlashcard();
-  }
+  });
 /////////////////////////
 
 /////////////////////////
 //  decksectionへ戻る
-  document.getElementById("backDeckForm").addEventListener("click", () => {
+  function backDeckSection() {
     // 表示をデッキ一覧に戻す
     currentdeckname = null; // 選択中のデッキ名をリセット
     currentCardList = []; // 現在のカードリストをリセット
@@ -751,7 +755,7 @@ let isNotInitialCard = false;
     // 中のデッキ名をクリア
     document.getElementById("cardList").innerHTML = ""; // カードリスト
     renderDeckPage(currentPage); // デッキ一覧を再表示
-  });
+  };
 /////////////////////////
 
 /////////////////////////
@@ -926,4 +930,3 @@ let isNotInitialCard = false;
 
 //>|>|>|>|>|>|>|>|>|>|
 //>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|
-
