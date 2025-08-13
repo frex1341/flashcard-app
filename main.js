@@ -730,11 +730,11 @@ let isNotInitialCard = false;
 
 /////////////////////////
 //  カードの裏返し表示
-  document.getElementById("cardFront").addEventListener("click", () => {
+  function reverseCards() {
     if (isNotInitialCard === false) {return;}
     showingCardFront = !showingCardFront;
     renderFlashcard();
-  });
+  };
 /////////////////////////
 
 /////////////////////////
