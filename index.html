@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>たいがのフラッシュカード</title>
+  <title>QuickMnemo</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="icons/favicon-16x16.png" sizes="16x16" />
 <link rel="icon" type="image/png" href="icons/favicon-32x32.png" sizes="32x32" />
@@ -11,62 +11,77 @@
   <link rel="apple-touch-icon" href="icons/icon-180.png">
 </head>
 <body>
-  <header>
-    <h1>My Flashcard</h1>
+  <header class="topHeader">
+    <div id="topDesign"></div>
+    <div class="topHeaderText">
+      <h1>QuickMnemo</h1>
+      <div id="pageSubName">Quick • Recall • Focus</div>
+    </div>
   </header>
+  
   
   <!-- デッキ一覧を表示する部分 -->
   <section id="deck-list-section">
-    <header class="section-header">デッキ一覧</header>
     <!-- デッキ一覧を表示する部分<div class="centered-wrapper">
       <button id="changeColor" onclick="switchTheme()">テーマ切り替え</button>
     </div> -->
-    <ul id="deckList"></ul>
-
-  <!-- ページネーション（ページ移動ボタン） -->
-    <div id="pagination">
-      <button id="prevPageBtn">前へ</button>
-      <span id="currentPage">1</span>
-      <button id="nextPageBtn">次へ</button>
+    <div id="deckListPanel">
+      <h2 class="listName">Deck List</h2>
+      <ul id="deckList"></ul>
+      <div id="pagination">
+        <button id="prevPageBtn">前へ</button>
+        <span id="currentPage">1</span>
+        <button id="nextPageBtn">次へ</button>
+      </div>
     </div>
+    
+  <!-- ページネーション（ページ移動ボタン） -->
+
 
     <div id="createDeckForm">
-     <input type="text" id="deckNameInput" placeholder="デッキ名を入力">
-      <button id="createDeckBtn" class="blue-btn">作成</button>
+      <h2 id="createDeckTitle">Create Deck Form</h2>
+      <div id="createDeckInputDiv">
+        <input type="text" id="deckNameInput" placeholder="デッキ名を入力">
+        <button id="createDeckBtn" class="blue-btn">作成</button>
+      </div>
     </div>
   </section>
 
   <section id="card-list-section" style="display: none;">
-    <header class="section-header">
-      <span id="selectedDeckName">選択中のデッキ名</span>
+    <button class="back-button" ondblclick="backDeckSection()">↼戻る</button>
+    <header>
+      <div class="deckTitle">
+        <div class="horizontalLine"></div>
+        <span id="selectedDeckName">選択中のデッキ名</span>
+        <div class="horizontalLine"></div>
+      </div>
+      <span id="selectedNextReview">次の復習日</span>
+      <span id="selectedLastReview">前回の復習日</span>
     </header>
-    <button id="backDeckForm">デッキ画面に戻る</button>
-     <span id="selectedNextReview">次の復習日</span>
-     <span id="selectedLastReview">前回の復習日</span>
     
     <!-- カードを表示するパネル -->
-    <div class = "main-container" onclick="reverseCard()">
+    <div class="main-container">
       <h2 id="cardFront">表（質問）</h2>
     </div>
     <div id="flashCardBtns">
       <button id="correctBtn" type="button">正解</button>
-      <button id="incorrectBtn" type="button">不正解</button>
+      <button id="incorrectBtn" class="red-btn" type="button">不正解</button>
     </div>
 
     <div id="cardCheckGb">
-      <label id="deckCheck">
+      <label id="deckCheck" title="テストモード（正答率、節約率、復習の更新）の実行">
         <input type="checkbox"  id="learningModeCb">
         テストモード（1日1回）
       </label>
-      <label id="repeatCheck">
+      <label id="repeatCheck" title="On:問題全体を全問正解まで周回, Off:不正解が０になるまで周回">
         <input type="checkbox"  id="strictedRepeatCb">
         間違えた問題だけ
       </label>
-      <label id="randomCheck">
+      <label id="randomCheck" title="On:ランダムに出題, Off:上から順番">
         <input type="checkbox" onclick="randomCheck(event)">
         ランダム
       </label>
-      <label id="reverseCheck">
+      <label id="reverseCheck" title="On:裏表逆に出題, Off:そのまま出題">
         <input type="checkbox" onclick="reverseCheck(event)">
         反転
       </label>
@@ -74,6 +89,7 @@
 
     <!-- カード追加フォーム -->
     <div id="addCardForm">
+      <h2 id="createDeckTitle">Create Card Form</h2>
       <input type="text" id="questionInput" placeholder="表（質問）">
       <input type="text" id="answerInput" placeholder="裏（答え）">
       <button id="addCardBtn" class="blue-btn">カードを追加</button>
@@ -81,7 +97,7 @@
 
     <!-- カード一覧 -->
     <div id="cardContainer">
-      <header class="section-header">カード一覧</header>
+      <h2 class="listName">Card List</h2>
       <ul id="cardList"></ul>
     </div>
   </section>
@@ -89,6 +105,3 @@
   <script src="main.js"></script>
 </body>
 </html>
-
-
-
