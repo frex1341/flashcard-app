@@ -451,7 +451,6 @@ let isNotInitialCard = false;
     currentCardIndex = -1;
     lapseCount = 0;
     isNotInitialCard = false;
-    selectedMode = "learning"
     document.getElementById("learningModeCb").disabled = true;
     document.getElementById("deck-list-section").style.display = "none";
     document.getElementById("card-list-section").style.display = "block";
@@ -463,7 +462,7 @@ let isNotInitialCard = false;
       document.getElementById("learningModeCb").disabled = false;
     }
     if (getDaysBetweenDates(deck.lastReviewDate,getJapanTime()) === 0) {
-      
+      selectedMode = "learning"
       document.getElementById("learningModeCb").disabled = true;
     }
     if (deck.lastReviewDate === null) {
