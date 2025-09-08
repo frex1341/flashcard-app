@@ -749,6 +749,7 @@ let isNotInitialCard = false;
     document.getElementById("correctBtn").disabled = false;
     document.getElementById("incorrectBtn").disabled = false;
     document.getElementById("learningModeCb").checked = false;
+    selectedMode = "learning";
     document.getElementById("deck-list-section").style.display = "block";
     document.getElementById("card-list-section").style.display = "none";
     selectedDeckId = null; // 選択中のデッキIDをリセット
